@@ -1,0 +1,112 @@
+﻿<h3 id="titreAddProject"> Mes projets</h3>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+@if (ViewBag.projectsDemarer.Count != 0)
+{
+    <h4 class="sousTitre">Projets démarrés :</h4><br />
+    using (Html.BeginForm("DownloadAsPDF", "Home", FormMethod.Post))
+    {
+        <div name="dvHtml" class="container col-md-12 ">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="tableauTitre">Titre</th>
+                        <th class="tableauTitre">Direction(s)</th>
+                        <th class="tableauTitre">Note</th>
+                        <th class="tableauTitre">Date de démarrage</th>
+                        <th class="tableauTitre">Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.projectsDemarer)
+                    {
+                        <tr>
+                            <td class="elementTableau">@item.Name</td>
+                            <td class="elementTableau">@if (item.Directions != null) { Write(item.Directions.Replace(";", " ")); }</td>
+                            <td class="elementTableau">@item.SommeNote/20</td>
+                            <td class="elementTableau">@item.DateDemarrage.ToShortDateString()</td>
+                            <td class="elementTableau">
+                                <select class="form-control select" name="status" id="status" onchange="showAlertConfirmation(this,@item.Id)">
+                                    <option value="null" @if (item.Status != null) { if (item.Status.Equals("null")) { Write(ViewBag.selected); } }>Veillez selectionner un choix </option>
+                                    <option value="Analyse de l’existant" @if (item.Status != null) { if (item.Status.Equals("Analyse de l’existant")) { Write(ViewBag.selected); } }> Analyse de l’existant </option>
+                                    <option value="Rercherche de solution" @if (item.Status != null) { if (item.Status.Equals("Rercherche de solution")) { Write(ViewBag.selected); } }>Rercherche de solution</option>
+                                    <option value="Test" @if (item.Status != null) { if (item.Status.Equals("Test")) { Write(ViewBag.selected); } }>Test</option>
+                                    <option value="Extension (mise en marché)" @if (item.Status != null) { if (item.Status.Equals("Extension (mise en marché)")) { Write(ViewBag.selected); } }>Extension (mise en marché)</option>
+                                    <option value="Sécurisation (suivi / pilotage/amélioration/correction)" @if (item.Status != null) { if (item.Status.Equals("Sécurisation (suivi / pilotage/amélioration/correction)")) { Write(ViewBag.selected); } }>Sécurisation (suivi / pilotage/amélioration/correction)</option>
+
+                                </select>
+
+                            </td>
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <p><button class="btn btn-success btn-tableau pull-right" type="submit">Extraire un PDF</button></p>
+        </div>
+    }
+
+}
+
+
+<!------------------------------------------------------------------------------------------------------------------------------------------------>
+@if (ViewBag.projectsEnAttente.Count != 0)
+{
+    <h4 class="sousTitre">Projets en attente :</h4><br />
+    <div class="container col-md-12 ">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="tableauTitre">Titre</th>
+                    <th class="tableauTitre">Direction(s)</th>
+                    <th class="tableauTitre">Date de création</th>
+                    <th class="tableauTitre">Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.projectsEnAttente)
+                {
+                    <tr>
+                        <td class="elementTableau">@item.Name</td>
+                        <td class="elementTableau">@if (item.Directions != null) { Write(item.Directions.Replace(";", " ")); }</td>
+                        <td class="elementTableau">@item.DateCreattion.ToShortDateString()</td>
+                        <td class="elementTableau">@item.SommeNote/20</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+}
+
+
+<!------------------------------------------------------------------------------------------------------------------------------------------------>
+@if (ViewBag.projectsEcarter.Count != 0)
+{
+    <h4 class="sousTitre">Projets écartés :</h4><br />
+    <div class="container col-md-12 ">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="tableauTitre">Titre</th>
+                    <th class="tableauTitre">Direction(s)</th>
+                    <th class="tableauTitre">Date de creation</th>
+                    <th class="tableauTitre">Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.projectsEcarter)
+                {
+                    <tr>
+                        <td class="elementTableau">@item.Name</td>
+                        <td class="elementTableau">@if (item.Directions != null) { Write(item.Directions.Replace(";", " ")); }</td>
+                        <td class="elementTableau">@item.DateCreattion.ToShortDateString()</td>
+                        <td class="elementTableau">@item.SommeNote/20</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

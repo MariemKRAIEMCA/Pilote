@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+<div class="col-md-12">
+    <h3 id="titreAddProject"> Nouveaux projets</h3>
+    <div class="btn-add-project">
+        <p> <a onclick='addProject()' class="btn btn btn-info btn-tableau">Créer un nouveau projet</a></p>
+    </div>
+    <div class="btn-add-project">
+        <p> <a class="btn btn-success btn-tableau">Comparer les projets</a></p>
+    </div>
+    <!------------------------------------------------------------------------------------------------------------------------------------------>
+    <div class="container col-md-12 ">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="tableauTitre">Titre</th>
+                    <th class="tableauTitre">Direction(s)</th>
+                    <th class="tableauTitre">Services</th>
+                    <th class="tableauTitre">Date de création</th>
+                    <th class="tableauTitre">projet consiste à</th><!--ProjectConsistance , Consistance-->
+                    <th class="tableauTitre">Initiative</th><!--Initiative , AutreInitiative-->
+                    <th class="tableauTitre">Note</th>
+                    <th class="tableauTitre">Décision</th>
+                    <th class="tableauTitre">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (@item.Decision == null)
+                    {
+                <tr>
+                    <td class="elementTableau"><a onclick='showProject("@item.Id")' href="#"> @item.Name </a></td>
+                    <td class="elementTableau">@if (item.Directions != null) { Write(item.Directions.Replace(";", " ")); }</td>
+                    <td class="elementTableau">@if (item.Services != null) { Write(item.Services.Replace(";", " ")); }</td>
+                    <td class="elementTableau">@item.DateCreattion.ToShortDateString()</td>
+                    <td class="elementTableau">@if (item.ProjectConsistance != null) { Write(item.ProjectConsistance); } @if (item.Consistance != null) { Write(item.Consistance); }</td>
+                    <td class="elementTableau">@if (item.Initiative != null) { Write(item.Initiative.Replace(";", " ")); } @if (item.AutreInitiative != null) { Write(item.AutreInitiative.Replace(";", " ")); }</td>
+                    <td class="elementTableau">
+                        @if (item.NoteId == 0)
+                        {<p> <a onclick='noteProject("@item.Id")' class="btn btn-warning btn-tableau">Noter</a></p> }
+                        else
+                        { <p>
+                                @item.SommeNote/20<a onclick='showNoteProject("@item.NoteId" , "@item.Id")' href="#">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                            </p>
+                        }
+                    </td>
+                    <td class="elementTableau">
+                        <p>
+                            <a onclick='decision("@item.Id")' class="btn btn-warning btn-tableau">Décider</a>
+                        </p>
+                    </td>
+                    <td class="elementTableau">
+                        <p>
+                            <a class="trash" onclick='Delete("@item.Id")' href="#">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </p>
+                    </td>
+
+                </tr>
+                    }
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

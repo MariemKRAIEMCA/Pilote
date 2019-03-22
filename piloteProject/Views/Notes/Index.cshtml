@@ -1,0 +1,77 @@
+﻿@model IEnumerable<piloteProject.Models.Note>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImpactSi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MacrosImpact)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Enjeux)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Satisfaction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Effet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Somme)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImpactSi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MacrosImpact)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Enjeux)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Satisfaction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Effet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Somme)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

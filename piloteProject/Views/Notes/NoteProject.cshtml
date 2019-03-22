@@ -1,0 +1,98 @@
+﻿
+
+@model piloteProject.Models.Note
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<div class="modal fade" id="ptNoteProjectModal" role="dialog">
+    <div class="modal-dialog" style="width:40%;text-align:center;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 id="titreAddProject"> Noter ce Projet</h3>
+            </div>
+
+            @using (Html.BeginForm("NoteProject", "Notes", FormMethod.Post))
+            {
+
+                <input Name="ProjectId" type="hidden" value="@ViewBag.ProjectId" />
+                <input Name="Id" type="hidden" value="@if (ViewBag.note.Id != null){@ViewBag.note.Id}" />
+                <div class="col-sm-12">
+                    <h4 class="sousTitre col-md-6">Impacts SI SEP (Presta/Start-up, CATS)</h4>
+                    <select class="form-control select col-md-6" name="ImpactSi" id="ImpactSi">
+                        <option value="0" @if (ViewBag.note.ImpactSi != null) { if (ViewBag.note.ImpactSi.Equals("0")) { Write(ViewBag.selected); } }>Veillez selectionner un choix </option>
+                        <option value="1" @if (ViewBag.note.ImpactSi != null) { if (ViewBag.note.ImpactSi.Equals("1")) { Write(ViewBag.selected); } }> 1/4 Multiplicité des entités impactées</option>
+                        <option value="2" @if (ViewBag.note.ImpactSi != null) { if (ViewBag.note.ImpactSi.Equals("2")) { Write(ViewBag.selected); } }>2/4 2 entités impactées (CATSet CR)</option>
+                        <option value="3" @if (ViewBag.note.ImpactSi != null) { if (ViewBag.note.ImpactSi.Equals("3")) { Write(ViewBag.selected); } }>3/4 1 seule entité impactée(CR)</option>
+                        <option value="4" @if (ViewBag.note.ImpactSi != null) { if (ViewBag.note.ImpactSi.Equals("4")) { Write(ViewBag.selected); } }>4/4 Aucun développementinformatique</option>
+
+                    </select>
+                </div>
+
+
+                <div class="col-sm-12">
+                    <h4 class="sousTitre col-md-6"> Evaluation des macros impacts</h4>
+                    <select class="form-control select col-md-6" name="MacrosImpact" id="MacrosImpact">
+                        <option value="0" @if (ViewBag.note.MacrosImpact != null) { if (ViewBag.note.MacrosImpact.Equals("0")) { Write(ViewBag.selected); } }>Veillez selectionner un choix </option>
+                        <option value="1" @if (ViewBag.note.MacrosImpact != null) { if (ViewBag.note.MacrosImpact.Equals("1")) { Write(ViewBag.selected); } }>1/4 Développements IT très importants</option>
+                        <option value="2" @if (ViewBag.note.MacrosImpact != null) { if (ViewBag.note.MacrosImpact.Equals("2")) { Write(ViewBag.selected); } }>2/4 Développements IT significatifs </option>
+                        <option value="3" @if (ViewBag.note.MacrosImpact != null) { if (ViewBag.note.MacrosImpact.Equals("3")) { Write(ViewBag.selected); } }>3/4 Développements IT faibles</option>
+                        <option value="4" @if (ViewBag.note.MacrosImpact != null) { if (ViewBag.note.MacrosImpact.Equals("4")) { Write(ViewBag.selected); } }>4/4 Aucun développement (macro Excel)</option>
+                    </select>
+                </div>
+
+
+                <div class="col-sm-12">
+                    <h4 class="sousTitre col-md-6">Enjeux pour l’entreprise </h4>
+                    <select class="form-control select col-md-6" name="Enjeux" id="Enjeux">
+                        <option value="0" @if (ViewBag.note.Enjeux != null) { if (ViewBag.note.Enjeux.Equals("0")) { Write(ViewBag.selected); } }>Veillez selectionner un choix </option>
+                        <option value="1" @if (ViewBag.note.Enjeux != null) { if (ViewBag.note.Enjeux.Equals("1")) { Write(ViewBag.selected); } }>1/4 Bénéfices réduits ou non quantifiables</option>
+                        <option value="2" @if (ViewBag.note.Enjeux != null) { if (ViewBag.note.Enjeux.Equals("2")) { Write(ViewBag.selected); } }>2/4 Bénéfices faibles (ou bénéfices d’image ou qualitatifs)</option>
+                        <option value="3" @if (ViewBag.note.Enjeux != null) { if (ViewBag.note.Enjeux.Equals("3")) { Write(ViewBag.selected); } }>3/4 Bénéfices significatifs quantifiés par une approche ROI</option>
+                        <option value="4" @if (ViewBag.note.Enjeux != null) { if (ViewBag.note.Enjeux.Equals("4")) { Write(ViewBag.selected); } }>4/4 Bénéfices importants quantifiés par une approche ROI</option>
+
+                    </select>
+                </div>
+
+                <div class="col-sm-12">
+                    <h4 class="sousTitre col-md-6">Satisfaction (client / collaborateur)</h4>
+                    <select class="form-control select col-md-6" name="Satisfaction" id="Satisfaction">
+                        <option value="0" @if (ViewBag.note.Satisfaction != null) { if (ViewBag.note.Satisfaction.Equals("0")) { Write(ViewBag.selected); } }>Veillez selectionner un choix </option>
+                        <option value="1" @if (ViewBag.note.Satisfaction != null) { if (ViewBag.note.Satisfaction.Equals("1")) { Write(ViewBag.selected); } }>1/4 Neutre</option>
+                        <option value="2" @if (ViewBag.note.Satisfaction != null) { if (ViewBag.note.Satisfaction.Equals("2")) { Write(ViewBag.selected); } }>2/4 Faible impact ou difficile à mesurer</option>
+                        <option value="3" @if (ViewBag.note.Satisfaction != null) { if (ViewBag.note.Satisfaction.Equals("3")) { Write(ViewBag.selected); } }>3/4 Amélioration importante d’une cible </option>
+                        <option value="4" @if (ViewBag.note.Satisfaction != null) { if (ViewBag.note.Satisfaction.Equals("4")) { Write(ViewBag.selected); } }>4/4 Amélioration notable, durable et mesurable</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-12">
+                    <h4 class="sousTitre col-md-6">Effet Wahou</h4>
+                    <select class="form-control select col-md-6" name="Effet" id="Effet">
+                        <option value="0" @if (ViewBag.note.Effet != null) { if (ViewBag.note.Effet.Equals("0")) { Write(ViewBag.selected); } }>Veillez selectionner un choix </option>
+                        <option value="1" @if (ViewBag.note.Effet != null) { if (ViewBag.note.Effet.Equals("1")) { Write(ViewBag.selected); } }>1/4 Pas original / Adaptation d’une solution existante</option>
+                        <option value="2" @if (ViewBag.note.Effet != null) { if (ViewBag.note.Effet.Equals("2")) { Write(ViewBag.selected); } }>2/4 Peu original / Amélioration d’une solution existante</option>
+                        <option value="3" @if (ViewBag.note.Effet != null) { if (ViewBag.note.Effet.Equals("3")) { Write(ViewBag.selected); } }>3/4 Nouveauté pour l’entreprise,idée originale </option>
+                        <option value="4" @if (ViewBag.note.Effet != null) { if (ViewBag.note.Effet.Equals("4")) { Write(ViewBag.selected); } }>4/4 Solution nouvelle sur le marché, très originale</option>
+                    </select>
+                </div>
+                <p> <a onclick='calculeNote()' class="btn btn-success btn-lg">Calculer</a></p>
+                <div id="sommeId"></div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary col-sm-2 pull-right " type="submit">Valider</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-danger">Annuler</button>
+
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+<script>
+    function calculeNote() {
+        var somme = parseInt($("#ImpactSi").val()) + parseInt($("#MacrosImpact").val()) + parseInt($("#Enjeux").val()) + parseInt($("#Satisfaction").val()) + parseInt($("#Effet").val());
+        $("#sommeId").html(somme);
+    }
+</script>

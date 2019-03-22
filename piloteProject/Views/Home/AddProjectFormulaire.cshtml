@@ -1,0 +1,175 @@
+﻿@model piloteProject.Models.Project
+
+@{
+    Layout = null;
+}
+<div class="modal fade" id="ptProjectModal" role="dialog">
+    <div class="modal-dialog" style="width:60%;text-align:center;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 id="titreAddProject"> Ajouter un Projet</h3>
+            </div>
+            @using (Html.BeginForm("AddProjectFormulaire", "Home", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "validateForm(event)" }))
+            {
+                <input type="hidden" name="Id" value="@if(ViewBag.project != null) {@ViewBag.project.Id}" />
+                <input type="hidden" name="Directions" id="DirectionsHidden" />
+                <input type="hidden" name="Services" id="ServicesHidden" />
+                <input type="hidden" name="Initiative" id="InitiativeHidden" />
+                <input type="hidden" name="SommeNote" value="@if(ViewBag.project != null){if(ViewBag.project.SommeNote != null){@ViewBag.project.SommeNote}}" />
+                <input type="hidden" name="NoteId" value="@if(ViewBag.project != null){if(ViewBag.project.NoteId != null){@ViewBag.project.NoteId}}" />
+                <input type="hidden" name="DateCreattion" value="@if(ViewBag.project != null){if(ViewBag.project.DateCreattion != null){@ViewBag.project.DateCreattion}}" />
+
+                <div class="col-md-12">
+                    <label class="col-sm-6 col-md-6 labelModelAddProject" for="Name">Titre du projet :</label>
+                    <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="Name" id="Name" value="@if (ViewBag.project != null) {@ViewBag.project.Name}" />
+
+                </div>
+
+                <div class="col-md-12">
+                    <label class="col-sm-6 col-md-6 labelModelAddProject" for="Redacteur">Rédacteur :</label>
+                    <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="Redacteur" id="Redacteur" value="@if(ViewBag.project != null) {@ViewBag.project.Redacteur}" />
+                </div>
+
+                <div class="col-sm-12">
+                    <label class="col-sm-6 col-md-6 labelModelAddProject">Direction(s) :</label>
+                    <select Name="DirectionsMultiple" id="Directions" class="selectpicker col-md-6" multiple data-selected-text-format="count">
+                        @foreach (var item in ViewBag.Directions)
+                        {
+                            <option id="@item.Id" value="@item.Name" @if ((ViewBag.project != null) && (ViewBag.project.Directions != null)) { if (ViewBag.project.Directions.ToUpper().Contains(@item.Name.ToUpper())) { Write(ViewBag.selected); } }>@item.Name</option>
+                        }
+                    </select>
+                    <p>
+                        <a class="trash" onclick='showService()' href="#">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                        </a>
+                    </p>
+                </div>
+
+
+                <div class="col-sm-12">
+                    <label class="col-sm-6 col-md-6 labelModelAddProject">Service(s):</label>
+                    <select Name="ServicesMultiple" id="Services" class="form-control select col-md-6" multiple>
+                        @foreach (var item in ViewBag.Services)
+                        {
+                            <option class="@item.DirectionId"value="@item.Name" @if ((ViewBag.project != null) && (ViewBag.project.Services != null)) { if (ViewBag.project.Services.ToUpper().Contains(@item.Name.ToUpper())) { Write(ViewBag.selected); } }>@item.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-12">
+                    <h4 class="sousTitre">Descriptif du projet :</h4><br />
+                    <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="DescriptifSouhait">Ce que nous souhaitons faire :</label>
+                        <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="DescriptifSouhait" id="DescriptifSouhait" value="@if(ViewBag.project != null) {@ViewBag.project.DescriptifSouhait}" />
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="DescriptifGain">Le gain que nous allons en tirer :</label>
+                        <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="DescriptifGain" id="DescriptifGain" value="@if(ViewBag.project != null) {@ViewBag.project.DescriptifGain}" />
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="DescriptifMoyen">Les moyens que j'envisage :</label>
+                        <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="DescriptifMoyen" id="DescriptifMoyen" value="@if(ViewBag.project != null) {@ViewBag.project.DescriptifMoyen}" />
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="DescriptifChefDeProjet">Le chef de projet :</label>
+                        <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="DescriptifChefDeProjet" id="DescriptifChefDeProjet" value="@if(ViewBag.project != null) {@ViewBag.project.DescriptifChefDeProjet}" />
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="DescriptifDelais">Le délai que je me donne :</label>
+                        <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="DescriptifDelais" id="DescriptifDelais" value="@if(ViewBag.project != null) {@ViewBag.project.DescriptifDelais}" />
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="DescriptifDifficulte">Les principales difficultés identifiées :</label>
+                        <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="DescriptifDifficulte" id="DescriptifDifficulte" value="@if(ViewBag.project != null) {@ViewBag.project.DescriptifDifficulte}" />
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <h4 class="sousTitre">Mon projet consiste à :</h4><br />
+                    <select class="form-control select" name="ProjectConsistance" id="ProjectConsistance" onchange="emptyConsistance(this)">
+                        <option value="null">Veillez selectionner un choix </option>
+                        <optgroup label="Approche outil :">
+                            <option value="Améliorer un outil existant" @if (ViewBag.project != null) { if (ViewBag.project.ProjectConsistance.Equals("Améliorer un outil existant")) { Write(ViewBag.selected); } }>Améliorer un outil existant </option>
+                            <option value="Mettre en place un nouvel outil propre à CACL" @if (ViewBag.project != null) { if (ViewBag.project.ProjectConsistance.Equals("Mettre en place un nouvel outil propre à CACL")) { Write(ViewBag.selected); } }>Mettre en place un nouvel outil propre à CACL</option>
+                            <option value="Mettre en place un outil provenant d'autres CR" @if (ViewBag.project != null) { if (ViewBag.project.ProjectConsistance.Equals("Mettre en place un outil provenant d'autres CR")) { Write(ViewBag.selected); } }>Mettre en place un outil provenant d'autres CR</option>
+                            <option value="Mettre en place un outil national(pôle Mêtier / CATS)" @if (ViewBag.project != null) { if (ViewBag.project.ProjectConsistance.Equals("Mettre en place un outil national(pôle Mêtier / CATS)")) { Write(ViewBag.selected); } }>Mettre en place un outil national(pôle Mêtier / ifTS)</option>
+                        </optgroup>
+                        <optgroup label="Approche process :">
+                            <option value="Améliorer/oprimiser un process existant" @if (ViewBag.project != null) { if (ViewBag.project.ProjectConsistance.Equals("Améliorer/oprimiser un process existant")) { Write(ViewBag.selected); } }>Améliorer/oprimiser un process existant</option>
+                            <option value="Créer un nouveau process" @if (ViewBag.project != null) { if (ViewBag.project.ProjectConsistance.Equals("Créer un nouveau process")) { Write(ViewBag.selected); } }>Créer un nouveau process</option>
+                            <option value="Fusionner des process" @if (ViewBag.project != null) { if (ViewBag.project.ProjectConsistance.Equals("Fusionner des process")) { Write(ViewBag.selected); } }>Fusionner des process</option>
+                            <option value="Autre" id="yesCheck" @if (ViewBag.project != null) { if (ViewBag.project.ProjectConsistance.Equals("Autre")) { Write(ViewBag.selected); } }>Autre</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="col-sm-12">
+                    <div id="showInitiative">
+                        <label class=" labelModelAddProject" for="Consistance">Autre:</label>
+                        <input class=" form-control inputModelAddProject" type="text" name="Consistance" id="Consistance" value="@if(ViewBag.project != null) {@ViewBag.project.Consistance}" />
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <h4 class="sousTitre">Initiative du projet :</h4><br />
+                    <select class="form-control select" name="InitiativeMultiple" id="Initiative" multiple>
+                        <option value="null">Veillez selectionner un ou plusieurs choix </option>
+                        <option value="Projet CARCENTRE" @if ((ViewBag.project != null) && (ViewBag.project.Initiative != null)) { if (ViewBag.project.Initiative.ToUpper().Contains("PROJET CARCENTRE")) { Write(ViewBag.selected); } }>Projet CARCENTRE</option>
+                        <option value="Collaborateurs" @if ((ViewBag.project != null) && (ViewBag.project.Initiative != null)) { if (ViewBag.project.Initiative.ToUpper().Contains("COLLABORATEURS")) { Write(ViewBag.selected); } }>Collaborateurs</option>
+                        <option value="PDU" @if ((ViewBag.project != null) && (ViewBag.project.Initiative != null)) { if (ViewBag.project.Initiative.ToUpper().Contains("PDU")) { Write(ViewBag.selected); } }>PDU</option>
+                        <option value="Manager" @if ((ViewBag.project != null) && (ViewBag.project.Initiative != null)) { if (ViewBag.project.Initiative.ToUpper().Contains("MANAGER")) { Write(ViewBag.selected); } }>Manager</option>
+                        <option value="Direction" @if ((ViewBag.project != null) && (ViewBag.project.Initiative != null)) { if (ViewBag.project.Initiative.ToUpper().Contains("DIRECTION")) { Write(ViewBag.selected); } }>Direction</option>
+                        <option value="Projet National" @if ((ViewBag.project != null) && (ViewBag.project.Initiative != null)) { if (ViewBag.project.Initiative.ToUpper().Contains("PROJET NATIONAL")) { Write(ViewBag.selected); } }>Projet National</option>
+                    </select>
+
+                </div>
+
+
+                <div class="col-sm-12">
+                    <label class=" labelModelAddProject" for="AutreInitiative">Autre:</label>
+                    <input class=" form-control inputModelAddProject" type="text" name="AutreInitiative" id="AutreInitiative" value="@if(ViewBag.project != null) {@ViewBag.project.AutreInitiative}" />
+                </div>
+
+                <div class="col-sm-12">
+                    <h4 class="sousTitre"> Part estimée de la technologie dans le projet :</h4><br />
+                    <select class="form-control select" name="Technologie" id="Technologie">
+                        <option value="null" @if (ViewBag.project != null) { if (ViewBag.project.Technologie.Equals("null")) { Write(ViewBag.selected); } }>Veillez selectionner un choix </option>
+                        <option value="moin de 20 pourcent" @if (ViewBag.project != null) { if (ViewBag.project.Technologie.Equals("moin de 20 pourcent")) { Write(ViewBag.selected); } }> Moin de 20 pourcent </option>
+                        <option value="entre 20 et 50 pourcent" @if (ViewBag.project != null) { if (ViewBag.project.Technologie.Equals("entre 20 et 50 pourcent")) { Write(ViewBag.selected); } }>Entre 20 et 50 %</option>
+                        <option value="entre 50 et 80 pourcent" @if (ViewBag.project != null) { if (ViewBag.project.Technologie.Equals("entre 50 et 80 pourcent")) { Write(ViewBag.selected); } }>Entre 50 et 80 %</option>
+                        <option value="je ne suis pas en capacité d'evaluer" @if (ViewBag.project != null) { if (ViewBag.project.Technologie.Equals("je ne suis pas en capacité d'evaluer")) { Write(ViewBag.selected); } }>Je ne suis pas en capacité d'évaluer</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-12">
+                    <h4 class="sousTitre">Applicatifs concernés:</h4><br />
+                    <input class=" form-control inputModelAddProject" type="text" name="Applicatif" id="Applicatif" value="@if(ViewBag.project != null) {@ViewBag.project.Applicatif}" />
+                </div>
+
+                <div class="col-sm-12">
+                    <h4 class="sousTitre">Transversalité du projet</h4>
+
+                    <div class="col-sm-6"><input type="radio" name="Transversalite" value="Concerne essentiellement mon service" id="choix1" @if (ViewBag.project != null) { if (ViewBag.project.Transversalite.Equals("Concerne essentiellement mon service")) { Write(ViewBag.Checked); } } checked /> <label class="labelModelAddProject" for="choix1">Concerne essentiellement mon service</label></div>
+                    <div class="col-sm-6"><input type="radio" name="Transversalite" value="Concerne essentiellement ma Direction" id="choix2" @if (ViewBag.project != null) { if (ViewBag.project.Transversalite.Equals("Concerne essentiellement ma Direction")) { Write(ViewBag.Checked); } } /> <label class="labelModelAddProject" for="choix2">Concerne essentiellement ma Direction</label></div>
+                    <div class="col-sm-6"><input type="radio" name="Transversalite" value="Concerne plus de 1 Directions" id="choix3" @if (ViewBag.project != null) { if (ViewBag.project.Transversalite.Equals("Concerne plus de 1 Directions")) { Write(ViewBag.Checked); } } /> <label class="labelModelAddProject" for="choix3">Concerne plus d'une directions</label></div>
+                </div>
+                <div class="col-sm-12">
+                    <label class="col-sm-6 labelModelAddProject" for="AutreDirections">Les directions concernées:</label>
+                    <input class="col-sm-6 col-md-6 form-control inputModelAddProject" name="AutreDirections" id="AutreDirections" type="text" value="@if(ViewBag.project != null) {@ViewBag.project.AutreDirections}" />
+                </div>
+                <div class="modal-footer">
+                    @if (ViewBag.project != null)
+                    {
+                        <button class="btn btn-primary col-sm-2 pull-right " type="submit">Modifier</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-primary col-sm-2 pull-right " type="submit" onsubmit="valider()">Créer</button>
+                    }
+                    <button type="button" data-dismiss="modal" class="btn btn-danger">Annuler</button>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+

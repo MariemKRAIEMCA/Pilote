@@ -1,0 +1,155 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.btn-add-project {
+    margin-top: 15px;
+}
+
+.inputModelAddProject {
+    border: none;
+    border-bottom-style: solid;
+    border-width: 1px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: -webkit-inline-box !important;
+}
+
+.labelModelAddProject {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#titreAddProject {
+    color: lightcoral;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top:50px;
+}
+
+.sousTitre {
+    font-family: Aharoni;
+    color: darkblue;
+    font-weight: bold;
+}
+
+.select {
+    display: -webkit-inline-box !important;
+}
+
+.projectBlock {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.projectTitle {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 22px !important;
+}
+
+.margine {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.tableauTitre {
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+.elementTableau {
+    font-size: 20px;
+    vertical-align: middle !important;
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+option {
+    font-size: 15px;
+    color: lightslategrey;
+}
+
+.btn-tableau {
+    color: black;
+    font-size: 14px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.btn {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+#sommeId {
+    font-size: 22px;
+    font-family: serif;
+    font-weight: bold;
+}
+
+td {
+    text-align: center;
+}
+
+.trash {
+    font-size: 18px;
+}
+
+.directionBlockStyle {
+    padding: 5px;
+    border: 1px solid #4CAF50;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.directionsBlock {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+
+.navbar-inverse .navbar-nav > li > a {
+    color: darkgreen !important;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.navbar-inverse {
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+#titre {
+    margin-top: 10px;
+    margin-right: 100px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color:darkslategrey;
+}

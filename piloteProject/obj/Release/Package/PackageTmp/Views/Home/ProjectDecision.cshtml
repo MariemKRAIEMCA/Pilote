@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<div class="modal fade" id="ptDecisionProjectModal" role="dialog">
+    <div class="modal-dialog" style="width:40%;text-align:center;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 id="titreAddProject"> Décision</h3>
+            </div>
+            @using (Html.BeginForm("ProjectDecision", "Home", FormMethod.Post))
+            {
+                <input type="hidden" Name="projectId" value="@ViewBag.ProjectId" />
+                <div class="col-sm-12">
+                    <p class="labelModelAddProject"><input type="radio" name="decision" value="demarer" />  - Demarrer   <BR> </p>
+                    <p class="labelModelAddProject"><input type="radio" name="decision" value="miseenattente" />  - Mise en attente  <BR></p>
+                    <p class="labelModelAddProject"><input type="radio" name="decision" value="ecarte" />  - Écarté  <BR> </p>
+                </div>
+
+
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary col-sm-2 pull-right ">Valider</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-danger">Annuler</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
