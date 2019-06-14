@@ -13,33 +13,42 @@
                         <th class="tableauTitre">Titre</th>
                         <th class="tableauTitre">Direction(s)</th>
                         <th class="tableauTitre">Note</th>
+                        <th class="tableauTitre">Gain ETP</th>
+                        <th class="tableauTitre">Charge Factory J/H</th>
                         <th class="tableauTitre">Date de démarrage</th>
                         <th class="tableauTitre">Statut</th>
+                        <th class="tableauTitre">Météo</th>
+
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in ViewBag.projectsDemarer)
                     {
-                        <tr>
-                            <td class="elementTableau">@item.Name</td>
-                            <td class="elementTableau">@if (item.Directions != null) { Write(item.Directions.Replace(";", " ")); }</td>
-                            <td class="elementTableau">@item.SommeNote/20</td>
-                            <td class="elementTableau">@item.DateDemarrage.ToShortDateString()</td>
-                            <td class="elementTableau">
-                                <select class="form-control select" name="status" id="status" onchange="showAlertConfirmation(this,@item.Id)">
-                                    <option value="null" @if (item.Status != null) { if (item.Status.Equals("null")) { Write(ViewBag.selected); } }>Veillez selectionner un choix </option>
-                                    <option value="Analyse de l’existant" @if (item.Status != null) { if (item.Status.Equals("Analyse de l’existant")) { Write(ViewBag.selected); } }> Analyse de l’existant </option>
-                                    <option value="Rercherche de solution" @if (item.Status != null) { if (item.Status.Equals("Rercherche de solution")) { Write(ViewBag.selected); } }>Rercherche de solution</option>
-                                    <option value="Test" @if (item.Status != null) { if (item.Status.Equals("Test")) { Write(ViewBag.selected); } }>Test</option>
-                                    <option value="Extension (mise en marché)" @if (item.Status != null) { if (item.Status.Equals("Extension (mise en marché)")) { Write(ViewBag.selected); } }>Extension (mise en marché)</option>
-                                    <option value="Sécurisation (suivi / pilotage/amélioration/correction)" @if (item.Status != null) { if (item.Status.Equals("Sécurisation (suivi / pilotage/amélioration/correction)")) { Write(ViewBag.selected); } }>Sécurisation (suivi / pilotage/amélioration/correction)</option>
+                    <tr>
+                        <td class="elementTableau"><a onclick='showProjectDecided("@item.Id")' href="#"> @item.Name </a></td>
+                        <td class="elementTableau">@if (item.Directions != null) { Write(item.Directions.Replace(";", " ")); }</td>
+                        <td class="elementTableau">@item.SommeNote/20</td>
+                        <td class="elementTableau">@item.gainEtp</td>
+                        <td class="elementTableau">@item.ChargeJh</td>
+                        <td class="elementTableau">@item.DateDemarrage.ToShortDateString()</td>
+                        <td class="elementTableau">
+                            <select class="form-control select" name="status" id="status" onchange="showAlertConfirmation(this,@item.Id)">
+                                <option value="null" @if (item.Status != null) { if (item.Status.Equals("null")) { Write(ViewBag.selected); } }>Veillez selectionner un choix </option>
+                                <option value="Analyse de l’existant" @if (item.Status != null) { if (item.Status.Equals("Analyse de l’existant")) { Write(ViewBag.selected); } }> Analyse de l’existant </option>
+                                <option value="Rercherche de solution" @if (item.Status != null) { if (item.Status.Equals("Rercherche de solution")) { Write(ViewBag.selected); } }>Rercherche de solution</option>
+                                <option value="Test" @if (item.Status != null) { if (item.Status.Equals("Test")) { Write(ViewBag.selected); } }>Test</option>
+                                <option value="Extension (mise en marché)" @if (item.Status != null) { if (item.Status.Equals("Extension (mise en marché)")) { Write(ViewBag.selected); } }>Extension (mise en marché)</option>
+                                <option value="Sécurisation (suivi / pilotage/amélioration/correction)" @if (item.Status != null) { if (item.Status.Equals("Sécurisation (suivi / pilotage/amélioration/correction)")) { Write(ViewBag.selected); } }>Sécurisation (suivi / pilotage/amélioration/correction)</option>
+                            </select>
+                        </td>
+                        <td class="elementTableau">
+                            <input type="radio" name="@item.Id" value="TresBien" id="choix1" onchange="showAlertConfirmationMeteo(this,@item.Id)"     @if (item.Meteo != null) { if (item.Meteo.Equals("TresBien")) { Write(ViewBag.Checked);} } /> <img src="~/Images/TresBien.png" height="30" width="30" />
+                            <input type="radio" name="@item.Id" value="Bien" id="choix2" onchange="showAlertConfirmationMeteo(this,@item.Id)" @if (item.Meteo != null) { if (item.Meteo.Equals("Bien")) { Write(ViewBag.Checked);  } } /><img src="~/Images/Bien.png" height="30" width="30" />
+                            <input type="radio" name="@item.Id" value="Moyen" id="choix3" onchange="showAlertConfirmationMeteo(this,@item.Id)" @if (item.Meteo != null) { if (item.Meteo.Equals("Moyen")) { Write(ViewBag.Checked);  } } /><img src="~/Images/Moyen.png" height="30" width="30" />
+                            <input type="radio" name="@item.Id" value="Mauvais" id="choix4" onchange="showAlertConfirmationMeteo(this,@item.Id)" @if (item.Meteo != null) { if (item.Meteo.Equals("Mauvais")) { Write(ViewBag.Checked);  } } /><img src="~/Images/Mauvais.png" height="30" width="30" />
 
-                                </select>
-
-                            </td>
-
-
-                        </tr>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

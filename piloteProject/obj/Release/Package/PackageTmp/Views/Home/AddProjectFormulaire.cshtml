@@ -12,25 +12,48 @@
             </div>
             @using (Html.BeginForm("AddProjectFormulaire", "Home", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "validateForm(event)" }))
             {
+
+                <input type="hidden" name="Page" value="@if (ViewBag.page != null) {@ViewBag.page}" />
                 <input type="hidden" name="Id" value="@if(ViewBag.project != null) {@ViewBag.project.Id}" />
+
                 <input type="hidden" name="Directions" id="DirectionsHidden" />
+
                 <input type="hidden" name="Services" id="ServicesHidden" />
+
                 <input type="hidden" name="Initiative" id="InitiativeHidden" />
+
                 <input type="hidden" name="SommeNote" value="@if(ViewBag.project != null){if(ViewBag.project.SommeNote != null){@ViewBag.project.SommeNote}}" />
+
                 <input type="hidden" name="NoteId" value="@if(ViewBag.project != null){if(ViewBag.project.NoteId != null){@ViewBag.project.NoteId}}" />
+
                 <input type="hidden" name="DateCreattion" value="@if(ViewBag.project != null){if(ViewBag.project.DateCreattion != null){@ViewBag.project.DateCreattion}}" />
+
+                <input type="hidden" name="Decision" value="@if(ViewBag.project != null){if(ViewBag.project.Decision != null){@ViewBag.project.Decision}}" />
+
+                <input type="hidden" name="Status" value="@if(ViewBag.project != null){if(ViewBag.project.Status != null){@ViewBag.project.Status}}" />
+
+                <input type="hidden" name="Meteo" value="@if(ViewBag.project != null){if(ViewBag.project.Meteo != null){@ViewBag.project.Meteo}}" />
+
+
+
 
                 <div class="col-md-12">
                     <label class="col-sm-6 col-md-6 labelModelAddProject" for="Name">Titre du projet :</label>
                     <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="Name" id="Name" value="@if (ViewBag.project != null) {@ViewBag.project.Name}" />
-
                 </div>
-
+                <div class="col-sm-12">
+                    <label class="col-sm-6 col-md-6 labelModelAddProject">Type:</label>
+                    <select Name="TypeProjet" id="TypeProjet" class="form-control select col-md-6">
+                        <option value="null">Veillez selectionner un choix </option>
+                        <option value="Projet privatif" @if ((ViewBag.project != null) && (ViewBag.project.TypeProjet != null)) { if (ViewBag.project.TypeProjet.Contains("Projet privatif")) { Write(ViewBag.selected); } }>Projet privatif</option>
+                        <option value="Outil FACTORY" @if ((ViewBag.project != null) && (ViewBag.project.TypeProjet != null)) { if (ViewBag.project.TypeProjet.Contains("Outil FACTORY")) { Write(ViewBag.selected); } }>Outil FACTORY</option>
+                        <option value="Projet national" @if ((ViewBag.project != null) && (ViewBag.project.TypeProjet != null)) { if (ViewBag.project.TypeProjet.Contains("Projet national")) { Write(ViewBag.selected); } }>Projet national</option>
+                    </select>
+                </div>
                 <div class="col-md-12">
                     <label class="col-sm-6 col-md-6 labelModelAddProject" for="Redacteur">Rédacteur :</label>
                     <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="Redacteur" id="Redacteur" value="@if(ViewBag.project != null) {@ViewBag.project.Redacteur}" />
                 </div>
-
                 <div class="col-sm-12">
                     <label class="col-sm-6 col-md-6 labelModelAddProject">Direction(s) :</label>
                     <select Name="DirectionsMultiple" id="Directions" class="selectpicker col-md-6" multiple data-selected-text-format="count">
@@ -46,13 +69,12 @@
                     </p>
                 </div>
 
-
                 <div class="col-sm-12">
                     <label class="col-sm-6 col-md-6 labelModelAddProject">Service(s):</label>
                     <select Name="ServicesMultiple" id="Services" class="form-control select col-md-6" multiple>
                         @foreach (var item in ViewBag.Services)
                         {
-                            <option class="@item.DirectionId"value="@item.Name" @if ((ViewBag.project != null) && (ViewBag.project.Services != null)) { if (ViewBag.project.Services.ToUpper().Contains(@item.Name.ToUpper())) { Write(ViewBag.selected); } }>@item.Name</option>
+                            <option class="@item.DirectionId" value="@item.Name" @if ((ViewBag.project != null) && (ViewBag.project.Services != null)) { if (ViewBag.project.Services.ToUpper().Contains(@item.Name.ToUpper())) { Write(ViewBag.selected); } }>@item.Name</option>
                         }
                     </select>
                 </div>
@@ -75,12 +97,53 @@
                         <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="DescriptifChefDeProjet" id="DescriptifChefDeProjet" value="@if(ViewBag.project != null) {@ViewBag.project.DescriptifChefDeProjet}" />
                     </div>
                     <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="Pilote">Pilote :</label>
+                        <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="Pilote" id="Pilote" value="@if(ViewBag.project != null) {@ViewBag.project.Pilote}" />
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="Sponsor">Sponsor :</label>
+                        <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="Sponsor" id="Sponsor" value="@if(ViewBag.project != null) {@ViewBag.project.Sponsor}" />
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="DateDemarrage">Date de debut :</label>
+                        <input class=" form-control " type="date" name="DateDemarrage" id="DateDemarrage" value="@if(ViewBag.project != null) {@ViewBag.DateDemarrage}" />
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="DatedeFin">Date de fin :</label>
+                        <input class="form-control " type="date" name="DatedeFin" id="DatedeFin" value="@if(ViewBag.project != null) {@ViewBag.DatedeFin}" />
+                    </div>
+                    <div class="col-md-12">
                         <label class="col-sm-6 col-md-6 labelModelAddProject" for="DescriptifDelais">Le délai que je me donne :</label>
                         <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="DescriptifDelais" id="DescriptifDelais" value="@if(ViewBag.project != null) {@ViewBag.project.DescriptifDelais}" />
                     </div>
                     <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="Impact">Impact :</label>
+                        <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="Impact" id="Impact" value="@if(ViewBag.project != null) {@ViewBag.project.Impact}" />
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="Marche">Marché :</label>
+                        <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="Marche" id="Marche" value="@if(ViewBag.project != null) {@ViewBag.project.Marche}" />
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="InstanceSuivie">Instance de suivie :</label>
+                        <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="InstanceSuivie" id="InstanceSuivie" value="@if(ViewBag.project != null) {@ViewBag.project.InstanceSuivie}" />
+                    </div>
+                    <div class="col-md-12">
                         <label class="col-sm-6 col-md-6 labelModelAddProject" for="DescriptifDifficulte">Les principales difficultés identifiées :</label>
                         <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="DescriptifDifficulte" id="DescriptifDifficulte" value="@if(ViewBag.project != null) {@ViewBag.project.DescriptifDifficulte}" />
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="gainEtp">Gain Etp :</label>
+                        <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="gainEtp" id="gainEtp" value="@if(ViewBag.project != null) {@ViewBag.project.gainEtp}" />
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="ChargeJh">Charge factory en j/h :</label>
+                        <input class="col-sm-6 col-md-6 form-control inputModelAddProject" type="text" name="ChargeJh" id="ChargeJh" value="@if(ViewBag.project != null) {@ViewBag.project.ChargeJh}" />
+                    </div>
+                    <div class="col-md-12">
+                        <label class="col-sm-6 col-md-6 labelModelAddProject" for="Commentaires">Commentaires :</label>
+                        <textarea class="col-sm-6 col-md-6 form-control inputModelAddProject" id="Commentaires" name="Commentaires" rows="3">@if(ViewBag.project != null) {@ViewBag.project.Commentaires}</textarea>
                     </div>
                 </div>
                 <div class="col-sm-12">

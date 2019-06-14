@@ -21,7 +21,8 @@
                     <th class="tableauTitre">Titre</th>
                     <th class="tableauTitre">Direction(s)</th>
                     <th class="tableauTitre">Services</th>
-                    <th class="tableauTitre">Date de création</th>
+                    <th class="tableauTitre">Gain ETP</th>
+                    <th class="tableauTitre">Charge Factory J/H</th>
                     <th class="tableauTitre">projet consiste à</th><!--ProjectConsistance , Consistance-->
                     <th class="tableauTitre">Initiative</th><!--Initiative , AutreInitiative-->
                     <th class="tableauTitre">Note</th>
@@ -38,7 +39,8 @@
                     <td class="elementTableau"><a onclick='showProject("@item.Id")' href="#"> @item.Name </a></td>
                     <td class="elementTableau">@if (item.Directions != null) { Write(item.Directions.Replace(";", " ")); }</td>
                     <td class="elementTableau">@if (item.Services != null) { Write(item.Services.Replace(";", " ")); }</td>
-                    <td class="elementTableau">@item.DateCreattion.ToShortDateString()</td>
+                    <td class="elementTableau">@item.gainEtp</td>
+                    <td class="elementTableau">@item.ChargeJh</td>
                     <td class="elementTableau">@if (item.ProjectConsistance != null) { Write(item.ProjectConsistance); } @if (item.Consistance != null) { Write(item.Consistance); }</td>
                     <td class="elementTableau">@if (item.Initiative != null) { Write(item.Initiative.Replace(";", " ")); } @if (item.AutreInitiative != null) { Write(item.AutreInitiative.Replace(";", " ")); }</td>
                     <td class="elementTableau">

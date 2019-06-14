@@ -23,8 +23,19 @@ function showProject(id) {
             $("#ptProjectModal").modal("show");
         }
     })
+}
 
-
+function showProjectDecided(id) {
+    var d = "true";
+    $.ajax({
+        type: "GET",
+        url: 'AddProjectFormulaire?Id=' + id + '&decide=' + d,
+        success: function (msg) {
+            $("#getModal").empty();
+            $("#getModal").html(msg);
+            $("#ptProjectModal").modal("show");
+        }
+    })
 }
 
 
@@ -112,7 +123,14 @@ function showAlertConfirmation(that, id) {
         type: "GET",
         url: '../Home/ProjectStatus?Id=' + id + '&status=' + that.value,
     })
+}
 
+function showAlertConfirmationMeteo(that, id) {
+    swal("Succès", "Le météo à été modifié!", "success");
+    $.ajax({
+        type: "GET",
+        url: '../Home/ProjectMeteo?Id=' + id + '&meteo=' + that.value,
+    })
 }
 
 function emptyConsistance(that) {
