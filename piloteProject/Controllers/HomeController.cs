@@ -159,7 +159,7 @@ namespace piloteProject.Controllers
         public void addPremierRow(ITable table)
         {
             ICell cell = table[0, 0];
-            IParagraph parg = cell.TextBody.AddParagraph("Projet \n (nom + descriptif)");
+            IParagraph parg = cell.TextBody.AddParagraph("Projet \n (nom + descriptive)");
             parg.HorizontalAlignment = HorizontalAlignmentType.Center;
             IFont font1 = parg.Font;
             font1.FontName = "Century Gothic (En-têtes)";
@@ -193,7 +193,7 @@ namespace piloteProject.Controllers
             cell.ColumnWidth = 100;
             cell = table[0, 4];
             cell.ColumnWidth = 100;
-            parg = cell.TextBody.AddParagraph("Météo projet");
+            parg = cell.TextBody.AddParagraph("Météo");
             font1 = parg.Font;
             font1.FontName = "Century Gothic (En-têtes)";
             font1.FontSize = 12;
@@ -202,7 +202,7 @@ namespace piloteProject.Controllers
             cell.ColumnWidth = 100;
             cell = table[0, 5];
             cell.ColumnWidth = 100;
-            parg = cell.TextBody.AddParagraph("Etapes C/A/R/T/E/S");
+            parg = cell.TextBody.AddParagraph("Étapes C/A/R/T/E/S");
             font1 = parg.Font;
             font1.FontName = "Century Gothic (En-têtes)";
             font1.FontSize = 12;
@@ -211,7 +211,7 @@ namespace piloteProject.Controllers
             cell.ColumnWidth = 100;
             cell = table[0, 6];
             cell.ColumnWidth = 100;
-            parg = cell.TextBody.AddParagraph("Commentaires");//\n(principales réalisations, prochaines étapres, alerte, point de vigilance
+            parg = cell.TextBody.AddParagraph("Commentaire");//\n(principales réalisations, prochaines étapres, alerte, point de vigilance
             font1 = parg.Font;
             font1.FontName = "Century Gothic (En-têtes)";
             font1.FontSize = 12;
@@ -223,11 +223,11 @@ namespace piloteProject.Controllers
         public void header(IPresentation pptxDoc, int slidenb)
         {
             //titre
-            IShape EtpText = pptxDoc.Slides[slidenb].AddTextBox(200, 20, 500, 200);
+            IShape EtpText = pptxDoc.Slides[slidenb].AddTextBox(250, 20, 500, 200);
 
             IParagraph EtpPa = EtpText.TextBody.AddParagraph();
             ITextPart EtpPar = EtpPa.AddTextPart();
-            EtpPar.Text = "Météo des Projets suivis au CQEF 17/05/2019";
+            EtpPar.Text = "Météo des Projets suivis au CQEF "+DateTime.Now.ToShortDateString();
             IFont font1 = EtpPar.Font;
             font1.FontName = "Century Gothic (En-têtes)";
             font1.FontSize = 20;
@@ -241,19 +241,19 @@ namespace piloteProject.Controllers
             font2.FontSize = 12;
             font2.Color = ColorObject.LightBlue;
             // Tres bien pic
-            FileStream pictureStreamTB = new FileStream(@"P:\PilotePicMeteo\TresBien.png", FileMode.Open);//Background pic
+            FileStream pictureStreamTB = new FileStream(@"C:\Users\Factory\Documents\GitProjects\Pilote\PilotePicMeteo\TresBien.png", FileMode.Open);//Background pic
             pptxDoc.Slides[slidenb].Shapes.AddPicture(pictureStreamTB, 20, 30, 21, 21);
             pictureStreamTB.Close();
             // bien pic 
-            FileStream pictureStreamB = new FileStream(@"P:\PilotePicMeteo\Bien.png", FileMode.Open);//Background pic
+            FileStream pictureStreamB = new FileStream(@"C:\Users\Factory\Documents\GitProjects\Pilote\PilotePicMeteo\Bien.png", FileMode.Open);//Background pic
             pptxDoc.Slides[slidenb].Shapes.AddPicture(pictureStreamB, 45, 30, 21, 21);
             pictureStreamB.Close();
             //Moyen Pic
-            FileStream pictureStreamMo = new FileStream(@"P:\PilotePicMeteo\Moyen.png", FileMode.Open);//Background pic
+            FileStream pictureStreamMo = new FileStream(@"C:\Users\Factory\Documents\GitProjects\Pilote\PilotePicMeteo\MoyenMeteo.png", FileMode.Open);//Background pic
             pptxDoc.Slides[slidenb].Shapes.AddPicture(pictureStreamMo, 70, 30, 21, 21);
             pictureStreamMo.Close();
             //Mauvais pic
-            FileStream pictureStreamMa = new FileStream(@"P:\PilotePicMeteo\Mauvais.png", FileMode.Open);//Background pic
+            FileStream pictureStreamMa = new FileStream(@"C:\Users\Factory\Documents\GitProjects\Pilote\PilotePicMeteo\Mauvais.png", FileMode.Open);//Background pic
             pptxDoc.Slides[slidenb].Shapes.AddPicture(pictureStreamMa, 95, 30, 21, 21);
             pictureStreamMa.Close();
 
@@ -315,17 +315,17 @@ namespace piloteProject.Controllers
             /******************************************************/
             Addtext(pptxDoc, slidenb, 830, 10, 130, 25, 9, "Niveau de transformation en CR :");
 
-            FileStream pictureStreamMa = new FileStream(@"P:\PilotePicMeteo\fort.png", FileMode.Open);//Background pic
+            FileStream pictureStreamMa = new FileStream(@"C:\Users\Factory\Documents\GitProjects\Pilote\PilotePicMeteo\fort.png", FileMode.Open);//Background pic
             pptxDoc.Slides[slidenb].Shapes.AddPicture(pictureStreamMa, 835, 35, 8, 18);
             pictureStreamMa.Close();
             Addtext(pptxDoc, slidenb, 840, 40, 30, 10, 6, "Fort");
 
-            pictureStreamMa = new FileStream(@"P:\PilotePicMeteo\moyenCr.png", FileMode.Open);//Background pic
+            pictureStreamMa = new FileStream(@"C:\Users\Factory\Documents\GitProjects\Pilote\PilotePicMeteo\moyen.png", FileMode.Open);//Background pic
             pptxDoc.Slides[slidenb].Shapes.AddPicture(pictureStreamMa, 870, 35, 8, 18);
             pictureStreamMa.Close();
             Addtext(pptxDoc, slidenb, 875, 40, 50, 10, 6, "Moyen");
 
-            pictureStreamMa = new FileStream(@"P:\PilotePicMeteo\faible.png", FileMode.Open);//Background pic
+            pictureStreamMa = new FileStream(@"C:\Users\Factory\Documents\GitProjects\Pilote\PilotePicMeteo\faible.png", FileMode.Open);//Background pic
             pptxDoc.Slides[slidenb].Shapes.AddPicture(pictureStreamMa, 910, 35, 8, 18);
             pictureStreamMa.Close();
             Addtext(pptxDoc, slidenb, 915, 40, 50, 10, 6, "Faible");
@@ -436,6 +436,15 @@ namespace piloteProject.Controllers
 
                 /*********************************************block*********************************************/
                 IShape NvReg = pptxDoc.Slides[pptNb].Shapes.AddShape(AutoShapeType.Rectangle, pointDebut, y, TailleDurée, 20);
+                //ajouter l'incone niveau de transaformation
+                if(project.TransCR != null)
+                {
+                    FileStream pictureStreamMa = new FileStream(@"C:\Users\Factory\Documents\GitProjects\Pilote\PilotePicMeteo\"+project.TransCR+".png", FileMode.Open);//Background pic
+                    pptxDoc.Slides[pptNb].Shapes.AddPicture(pictureStreamMa, pointDebut + 2, y+2, 7, 15);
+                    pictureStreamMa.Close();
+                }
+
+
                 NvReg.Fill.FillType = FillType.Solid;
                 NvReg.Fill.SolidFill.Color = ColorObject.FromArgb(1, R, G, B);
                 NvReg.LineFormat.Fill.SolidFill.Color = ColorObject.Transparent;
@@ -471,7 +480,7 @@ namespace piloteProject.Controllers
             using (db)
             {
                 projectsPrivatifDemarer = db.Projects.SqlQuery("SELECT * FROM projects WHERE decision='demarer' AND TypeProjet ='Projet privatif'").ToList();
-                projectsFactoryDemarer = db.Projects.SqlQuery("SELECT * FROM projects WHERE decision='demarer' ").ToList();//AND TypeProjet ='Outil FACTORY'
+                projectsFactoryDemarer = db.Projects.SqlQuery("SELECT * FROM projects WHERE decision='demarer' AND TypeProjet ='Outil FACTORY' ").ToList();//
                 projectsNatiauxDemarer = db.Projects.SqlQuery("SELECT * FROM projects WHERE decision='demarer' AND TypeProjet ='Projet national'").ToList();
 
                 projectsProfClient = db.Projects.SqlQuery("SELECT * FROM projects WHERE decision='demarer' AND Marche ='Professionnels' AND Impact ='Client'").ToList();
@@ -491,15 +500,15 @@ namespace piloteProject.Controllers
 
             IPresentation pptxDoc = Presentation.Create();
             //Add slide to the presentation
-            addFullTable(pptxDoc, projectsFactoryDemarer, "Privatif", BuiltInTableStyle.LightStyle1Accent6);
+            addFullTable(pptxDoc, projectsPrivatifDemarer, "Privatif", BuiltInTableStyle.LightStyle1Accent6);
             addFullTable(pptxDoc, projectsFactoryDemarer, "Factory", BuiltInTableStyle.LightStyle1Accent4);
-            addFullTable(pptxDoc, projectsFactoryDemarer, "Nationaux", BuiltInTableStyle.LightStyle1Accent1);
+            addFullTable(pptxDoc, projectsNatiauxDemarer, "Nationaux", BuiltInTableStyle.LightStyle1Accent1);
 
 
             // slide Marché prefessionnels
             ISlide slide4 = pptxDoc.Slides.Add(SlideLayoutType.Blank);
             tableauPlanning(pptxDoc, 3);
-            IShape MarcheText = pptxDoc.Slides[3].AddTextBox(140, 20, 300, 50);
+            IShape MarcheText = pptxDoc.Slides[3].AddTextBox(70, 20, 300, 50);
             IParagraph MarchPa = MarcheText.TextBody.AddParagraph();
             ITextPart MarchPar = MarchPa.AddTextPart();
             MarchPar.Text = "Marché des Professionnels";
@@ -508,16 +517,16 @@ namespace piloteProject.Controllers
             font1.FontSize = 22;
             font1.Color = ColorObject.FromArgb(1, 148, 194, 117);
             font1.Bold = true;
-
-            addProjectWithDate(projectsFactoryDemarer, pptxDoc, 3, 78); //projectsProfClient
-            addProjectWithDate(projectsFactoryDemarer, pptxDoc, 3, 228);//projectsProfRes
-            addProjectWithDate(projectsFactoryDemarer, pptxDoc, 3, 378);//projectsProfSite
-
+            // Marché prefesionnels
+            addProjectWithDate(projectsProfClient, pptxDoc, 3, 78); //projectsProfClient
+            addProjectWithDate(projectsProfRes, pptxDoc, 3, 228);//projectsProfRes
+            addProjectWithDate(projectsProfSite, pptxDoc, 3, 355);//projectsProfSite
+            
 
             // slide Marché Particuliers
             ISlide slide5 = pptxDoc.Slides.Add(SlideLayoutType.Blank);
             tableauPlanning(pptxDoc, 4);
-            IShape MarcheText2 = pptxDoc.Slides[4].AddTextBox(140, 20, 300, 50);
+            IShape MarcheText2 = pptxDoc.Slides[4].AddTextBox(70, 20, 300, 50);
             IParagraph MarchPa2 = MarcheText2.TextBody.AddParagraph();
             ITextPart MarchPar2 = MarchPa2.AddTextPart();
             MarchPar2.Text = "Marché des Particuliers";
@@ -526,11 +535,16 @@ namespace piloteProject.Controllers
             font2.FontSize = 22;
             font2.Color = ColorObject.FromArgb(1, 255, 192, 000);
             font2.Bold = true;
+            //Marché Particuliers
+
+            addProjectWithDate(projectsPartClient, pptxDoc, 4, 78); //projectsProfClient
+            addProjectWithDate(projectsPartRes, pptxDoc, 4, 228);//projectsProfRes
+            addProjectWithDate(projectsPartSite, pptxDoc, 4, 355);//projectsProfSite
 
             // Marche entreprises
             ISlide slide6 = pptxDoc.Slides.Add(SlideLayoutType.Blank);
             tableauPlanning(pptxDoc, 5);
-            IShape MarcheText3 = pptxDoc.Slides[5].AddTextBox(140, 20, 300, 50);
+            IShape MarcheText3 = pptxDoc.Slides[5].AddTextBox(70, 20, 300, 50);
             IParagraph MarchPa3 = MarcheText3.TextBody.AddParagraph();
             ITextPart MarchPar3 = MarchPa3.AddTextPart();
             MarchPar3.Text = "Marché des Entreprises";
@@ -539,12 +553,50 @@ namespace piloteProject.Controllers
             font3.FontSize = 22;
             font3.Color = ColorObject.FromArgb(1, 091,155,213);
             font3.Bold = true;
+            //Marché Entreprise
 
+            addProjectWithDate(projectsEntClient, pptxDoc, 3, 78); //projectsProfClient
+            addProjectWithDate(projectsEntRes, pptxDoc, 3, 228);//projectsProfRes
+            addProjectWithDate(projectsEntSite, pptxDoc, 3, 355);//projectsProfSite
 
             //Save the presentation
-            pptxDoc.Save(@"P:\testPilotses.pptx");
-            //Close the presentation
-            pptxDoc.Close();
+            pptxDoc.Save(@"C:\Users\Factory\Documents\GitProjects\Pilote\testPilotses.pptx");
+            
+            // debut de telechargement
+
+            MemoryStream ms = new MemoryStream();
+
+            using ( ms )
+            using (FileStream file = new FileStream(@"C:\Users\Factory\Documents\GitProjects\Pilote\testPilotses.pptx", FileMode.Open, FileAccess.Read))
+            {
+                byte[] bytes = new byte[file.Length];
+                file.Read(bytes, 0, (int)file.Length);
+                ms.Write(bytes, 0, (int)file.Length);
+                ms.Position = 0;
+                byte[] buffer = new byte[(int)ms.Length];
+                ms.Read(buffer, 0, (int)ms.Length);
+                System.Web.HttpContext.Current.Response.Clear();
+                System.Web.HttpContext.Current.Response.Buffer = true;
+                System.Web.HttpContext.Current.Response.AddHeader("Content-Type", "application/pptx");
+                System.Web.HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment;filename=testPilotses.pptx;");
+
+                System.Web.HttpContext.Current.Response.BinaryWrite(buffer);
+                System.Web.HttpContext.Current.Response.Flush();
+                System.Web.HttpContext.Current.Response.Close();
+                pptxDoc.Close();
+            }
+
+
+            //fin de telechargement
+
+
+
+
+
+
+
+
+
             return RedirectToAction("Index");
         }
 
@@ -552,8 +604,20 @@ namespace piloteProject.Controllers
         {
             ISlide slide = pptxDoc.Slides.Add(SlideLayoutType.Blank);
             int nbSlide = pptxDoc.Slides.Count();
-            Addtext(pptxDoc, nbSlide - 1, 100, 70, 400, 50, 18, "projets " + type + " Centre Loire");
-            ITable table = slide.Shapes.AddTable(7, 7, 100, 120, 300, 200);
+            // projet centre loire 
+            IShape MarcheText = pptxDoc.Slides[nbSlide -1].AddTextBox(90, 70, 400, 50);
+            IParagraph MarchPa = MarcheText.TextBody.AddParagraph();
+            ITextPart MarchPar = MarchPa.AddTextPart();
+            MarchPar.Text = "Projets " + type + " Centre Loire :";
+            IFont font1 = MarchPar.Font;
+            font1.FontName = "Calibri (Corps)";
+            font1.FontSize = 18;
+            font1.Color = ColorObject.FromArgb(1, 75, 75, 75);
+            font1.Bold = true;
+
+
+
+            ITable table = slide.Shapes.AddTable(7, 7, 80, 120, 400, 250);
             table.BuiltInStyle = style;
             header(pptxDoc, nbSlide - 1);
             addPremierRow(table);
@@ -572,34 +636,39 @@ namespace piloteProject.Controllers
                 textAlignment(parg);
                 parg = cells[3].TextBody.AddParagraph(project.DescriptifChefDeProjet);
                 textAlignment(parg);
-                if (project.Meteo.Equals("TresBien"))
+                if (project.Meteo != null)
                 {
-                    // Tres bien pic
-                    FileStream pictureStreamTB = new FileStream(@"P:\PilotePicMeteo\TresBien.png", FileMode.Open);//Background pic
-                    pptxDoc.Slides[nbSlide - 1].Shapes.AddPicture(pictureStreamTB, 525, iconeIndex, 25, 25);
-                    pictureStreamTB.Close();
+                    if (project.Meteo.Equals("TresBien"))
+                    {
+                        // Tres bien pic
+                        FileStream pictureStreamTB = new FileStream(@"C:\Users\Factory\Documents\GitProjects\Pilote\PilotePicMeteo\TresBien.png", FileMode.Open);//Background pic
+                        pptxDoc.Slides[nbSlide - 1].Shapes.AddPicture(pictureStreamTB, 525, iconeIndex, 25, 25);
+                        pictureStreamTB.Close();
 
-                }
-                else if(project.Meteo.Equals("Bien"))
-                {
-                    FileStream pictureStreamTB = new FileStream(@"P:\PilotePicMeteo\Bien.png", FileMode.Open);//Background pic
-                    pptxDoc.Slides[nbSlide - 1].Shapes.AddPicture(pictureStreamTB, 525, iconeIndex, 25, 25);
-                    pictureStreamTB.Close();
+                    }
+                    else if (project.Meteo.Equals("Bien"))
+                    {
+                        FileStream pictureStreamTB = new FileStream(@"C:\Users\Factory\Documents\GitProjects\Pilote\PilotePicMeteo\Bien.png", FileMode.Open);//Background pic
+                        pptxDoc.Slides[nbSlide - 1].Shapes.AddPicture(pictureStreamTB, 525, iconeIndex, 25, 25);
+                        pictureStreamTB.Close();
 
-                }
-                else if (project.Meteo.Equals("Moyen"))
-                {
-                    FileStream pictureStreamTB = new FileStream(@"P:\PilotePicMeteo\Moyen.png", FileMode.Open);//Background pic
-                    pptxDoc.Slides[nbSlide - 1].Shapes.AddPicture(pictureStreamTB, 525, iconeIndex, 25, 25);
-                    pictureStreamTB.Close();
+                    }
+                    else if (project.Meteo.Equals("Moyen"))
+                    {
+                        FileStream pictureStreamTB = new FileStream(@"C:\Users\Factory\Documents\GitProjects\Pilote\PilotePicMeteo\MoyenMeteo.png", FileMode.Open);//Background pic
+                        pptxDoc.Slides[nbSlide - 1].Shapes.AddPicture(pictureStreamTB, 525, iconeIndex, 25, 25);
+                        pictureStreamTB.Close();
 
+                    }
+                    else if (project.Meteo.Equals("Mauvais"))
+                    {
+                        FileStream pictureStreamTB = new FileStream(@"C:\Users\Factory\Documents\GitProjects\Pilote\PilotePicMeteo\Mauvais.png", FileMode.Open);//Background pic
+                        pptxDoc.Slides[nbSlide - 1].Shapes.AddPicture(pictureStreamTB, 525, iconeIndex, 25, 25);
+                        pictureStreamTB.Close();
+                    }
                 }
-                else if(project.Meteo.Equals("Mauvais"))
-                {
-                    FileStream pictureStreamTB = new FileStream(@"P:\PilotePicMeteo\Mauvais.png", FileMode.Open);//Background pic
-                    pptxDoc.Slides[nbSlide - 1].Shapes.AddPicture(pictureStreamTB, 525, iconeIndex, 25, 25);
-                    pictureStreamTB.Close();
-                }
+
+
 
                 parg = cells[5].TextBody.AddParagraph(project.Status);
                 textAlignment(parg);
@@ -612,6 +681,7 @@ namespace piloteProject.Controllers
         public void textAlignment(IParagraph parg)
         {
             parg.HorizontalAlignment = HorizontalAlignmentType.Center;
+           
             IFont font1 = parg.Font;
             font1.FontName = "Century Gothic (En-têtes)";
             font1.FontSize = 12;

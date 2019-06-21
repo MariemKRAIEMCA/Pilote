@@ -156,9 +156,9 @@
                         <label class="col-sm-6 col-md-6 labelModelAddProject" for="TransCR">Niveau de transformation en CR :</label>
                         <select Name="TransCR" id="TransCR" class="form-control select col-md-6">
                             <option value="null">Veillez selectionner un choix </option>
-                            <option value="Fort" @if ((ViewBag.project != null) && (ViewBag.project.TransCR != null)) { if (ViewBag.project.TransCR.Contains("Fort")) { Write(ViewBag.selected); } }>Fort</option>
-                            <option value="Moyen" @if ((ViewBag.project != null) && (ViewBag.project.TransCR != null)) { if (ViewBag.project.TransCR.Contains("Moyen")) { Write(ViewBag.selected); } }>Moyen</option>
-                            <option value="Faible" @if ((ViewBag.project != null) && (ViewBag.project.TransCR != null)) { if (ViewBag.project.TransCR.Contains("Faible")) { Write(ViewBag.selected); } }>Entreprises</option>
+                            <option value="fort" @if ((ViewBag.project != null) && (ViewBag.project.TransCR != null)) { if (ViewBag.project.TransCR.Contains("fort")) { Write(ViewBag.selected); } }>Fort</option>
+                            <option value="moyen" @if ((ViewBag.project != null) && (ViewBag.project.TransCR != null)) { if (ViewBag.project.TransCR.Contains("moyen")) { Write(ViewBag.selected); } }>Moyen</option>
+                            <option value="faible" @if ((ViewBag.project != null) && (ViewBag.project.TransCR != null)) { if (ViewBag.project.TransCR.Contains("faible")) { Write(ViewBag.selected); } }>Faible</option>
                         </select>
                     </div>
                     <div class="col-md-12">
